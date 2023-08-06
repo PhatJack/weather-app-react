@@ -21,8 +21,6 @@ function App() {
 
 	const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=1ead008b6f7bc918321c3c7cca663b0c`
 
-	// console.log(url)
-
 	useEffect(() => {
 		const timeOutId = setTimeout(() => setLocation(location), 500);
 		return () => clearTimeout(timeOutId);
@@ -32,7 +30,7 @@ function App() {
 		if (event.key == 'Enter') {
 			axios.get(url).then(response => {
 				setData(response.data)
-				console.log(response.data)
+				// console.log(response.data)
 			})
 		}
 	}
@@ -47,7 +45,10 @@ function App() {
 							type="text"
 							placeholder='Enter your location'
 							value={location}
-							onChange={event => setLocation(event.target.value)}
+							onChange={event => {
+								setLocation(event.target.value)
+								console.log(data.name)
+							}}
 							onKeyPress={getWeather}
 							className='focus:outline-none w-[300px] text-lg p-3 bg-transparent placeholder:text-white' />
 						<AiOutlineSearch size={30} color='white' className='mr-4 cursor-pointer' />
